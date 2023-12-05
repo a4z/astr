@@ -1,0 +1,45 @@
+name: CMake Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            cmake_preset: ninja
+          - os: windows-latest
+            cmake_preset: msvc22
+          - os: macos-latest
+            cmake_preset: xcode
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build
+
+    - name: Configure CMake
+      run: |
+        cmake --preset ${{ matrix.cmake_preset }}
+
+    - name: Build
+      run: |
+        cmake --build --preset ${{ matrix.cmake_preset }}
+
+    - name: Test
+      run: |
+        ctest --preset ${{ matrix.cmake_preset }} --output-on-failure

@@ -1,0 +1,129 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 27,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "inherits": "base",
+      "name": "ninja",
+      "displayName": "Default Config",
+      "description": "Default build using Ninja",
+      "generator": "Ninja Multi-Config"
+    },
+    {
+      "inherits": "base",
+      "name": "brew-gcc",
+      "displayName": "Brew Gcc",
+      "description": "Gcc on Mac, Ninja Multiconfig",
+      "generator": "Ninja Multi-Config",
+      "toolchainFile": "cmake/brew-gcc-toolchain.cmake"
+    },
+    {
+      "inherits": "base",
+      "name": "msvc22",
+      "displayName": "VS 2022",
+      "description": "Visual Studio 2022 Multiconfig",
+      "generator": "Visual Studio 17 2022"
+    },
+    {
+      "inherits": "base",
+      "name": "xcode",
+      "displayName": "Xcode",
+      "description": "Xcode Multiconfig",
+      "generator": "Xcode"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ninja",
+      "configurePreset": "ninja",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ninja-release",
+      "configurePreset": "ninja",
+      "configuration": "Release"
+    },
+    {
+      "name": "brew-gcc",
+      "configurePreset": "brew-gcc",
+      "configuration": "Debug"
+    },
+    {
+      "name": "brew-gcc-release",
+      "configurePreset": "brew-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "msvc22",
+      "configurePreset": "msvc22",
+      "configuration": "Debug"
+    },
+    {
+      "name": "msvc22-release",
+      "configurePreset": "msvc22",
+      "configuration": "Release"
+    },
+    {
+      "name": "xcode",
+      "configurePreset": "xcode",
+      "configuration": "Debug"
+    },
+    {
+      "name": "xcode-release",
+      "configurePreset": "xcode",
+      "configuration": "Release"
+    }
+
+  ],
+  "testPresets": [
+    {
+      "name": "ninja",
+      "configurePreset": "ninja",
+      "configuration": "Debug"
+    },
+    {
+      "name": "ninja-release",
+      "configurePreset": "ninja",
+      "configuration": "Release"
+    },
+    {
+      "name": "brew-gcc",
+      "configurePreset": "brew-gcc",
+      "configuration": "Debug"
+    },
+    {
+      "name": "brew-gcc-release",
+      "inherits": "brew-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "msvc22",
+      "configurePreset": "msvc22",
+      "configuration": "Debug"
+    },
+    {
+      "name": "msvc22-release",
+      "inherits": "msvc22",
+      "configuration": "Release"
+    },
+    {
+      "name": "xcode",
+      "configurePreset": "xcode",
+      "configuration": "Debug"
+    },
+    {
+      "name": "xcode-release",
+      "inherits": "xcode",
+      "configuration": "Release"
+    }
+  ]
+}

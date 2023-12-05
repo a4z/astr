@@ -1,0 +1,11 @@
+Checks: '*,-google-*'
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: true
+CheckOptions:
+  - key: readability-identifier-naming.NamespaceCase
+    value: CamelCase
+  - key: readability-identifier-naming.VariableName
+    value: lower_case
+  - key: readability-identifier-naming.FunctionCase
+    value: lower_case

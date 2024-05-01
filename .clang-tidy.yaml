@@ -4,7 +4,7 @@ HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: true
 CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
-    value: CamelCase
+    value: lower_case
   - key: readability-identifier-naming.VariableName
     value: lower_case
   - key: readability-identifier-naming.FunctionCase

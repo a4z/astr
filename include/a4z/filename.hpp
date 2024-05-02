@@ -5,7 +5,6 @@
 
 namespace a4z {
 
-
   constexpr char slash = on_windows() ? '\\' : '/';
 
 #define a4z_file_name                                                          \

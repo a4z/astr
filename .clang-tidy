@@ -1,0 +1,61 @@
+Checks: >
+  *,
+  -clang-analyzer-*,
+  -google-*,
+  -llvm-*,
+  -llvmlibc-*,
+  -altera-*,
+  -fuchsia-*,
+  -hicpp-no-array-decay,
+  -hicpp-*,
+  -performance-*,
+  -readability-identifier-length,
+  -readability-avoid-nested-conditional-operator,
+  -bugprone-easily-swappable-parameters,
+  -misc-no-recursion,
+  -misc-non-private-member-variables-in-classes,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-c-arrays,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -modernize-avoid-c-arrays,
+#  -modernize-use-nodiscard,
+
+CheckOptions:
+  - key: modernize-use-auto
+    value: 'false'
+  - key: cppcoreguidelines-avoid-magic-numbers
+    value: 'false'
+  - key: cppcoreguidelines-avoid-c-arrays
+    value: 'true'
+  - key: cppcoreguidelines-non-private-member-variables-in-classes
+    value: 'true'
+  - key: cppcoreguidelines-pro-type-member-init
+    value: 'true'
+  - key: cppcoreguidelines-pro-bounds-array-to-pointer-decay
+    value: 'true'
+  - key: cppcoreguidelines-pro-bounds-constant-array-index
+    value: 'true'
+  - key: modernize-avoid-bind
+    value: 'true'
+  - key: modernize-use-emplace
+    value: 'true'
+  - key: modernize-make-shared
+    value: 'true'
+  - key: modernize-make-unique
+    value: 'true'
+  - key: modernize-use-override
+    value: 'true'
+  - key: modernize-use-using
+    value: 'true'
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.VariableName
+    value: lower_case
+  - key: readability-identifier-naming.FunctionCase
+    value: lower_case
+
+WarningsAsErrors: ''
+HeaderFilterRegex: 'src/|include/|tests/'
+FormatStyle: 'file'

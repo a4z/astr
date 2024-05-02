@@ -23,12 +23,19 @@ if(PROJECT_IS_TOP_LEVEL)
 
     add_custom_target(
         clang-tidy
-        COMMAND clang-tidy -p="${CMAKE_CURRENT_BINARY_DIR}" ${CMAKE_SOURCE_DIR}/include/**/*.hpp ${CMAKE_SOURCE_DIR}/tests/**/*.?pp --extra-arg=-std=c++${CMAKE_CXX_STANDARD}
+        # COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-tidy -p=${CMAKE_CURRENT_BINARY_DIR} --extra-arg=-std=c++${CMAKE_CXX_STANDARD}
+        COMMAND find ${CMAKE_SOURCE_DIR}/include -name *.hpp -exec clang-tidy --extra-arg=-std=c++${CMAKE_CXX_STANDARD} -p ${CMAKE_BINARY_DIR} {} \;
+        # COMMAND find ${CMAKE_SOURCE_DIR}/tests -name '*.cpp' -exec clang-tidy -p ${CMAKE_BINARY_DIR} {}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        VERBATIM
+        USES_TERMINAL
     )
+
 
     add_custom_target(
         clang-format
         COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         VERBATIM
     )
 

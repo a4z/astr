@@ -11,29 +11,30 @@ namespace a4z {
   struct astr {
     char data[N] = {0};
 
-    constexpr astr(const char (&arr)[N]) noexcept {
+    constexpr explicit astr(const char (&arr)[N]) noexcept {
       for (std::size_t i = 0; i < N; ++i) {
         data[i] = *(arr + i);
       }
     }
 
-    constexpr const char* c_str() const noexcept { return &data[0]; }
-
-    constexpr std::size_t size() const noexcept { return N - 1; }
-
-    char* begin() noexcept{ return &data[0]; }
-    char* end() noexcept { return &data[N - 1]; }
-
-    const char* begin() const noexcept { return &data[0]; }
-    const char* end() const noexcept { return &data[N - 1]; }
-
-    const char* cbegin() const noexcept { return &data[0]; }
-    const char* cend() const noexcept { return &data[N - 1]; }
-
-    constexpr operator std::string_view() const noexcept {
-        return std::string_view(data, size());
+    [[nodiscard]] constexpr const char* c_str() const noexcept {
+      return &data[0];
     }
 
+    [[nodiscard]] constexpr std::size_t size() const noexcept { return N - 1; }
+
+    char* begin() noexcept { return &data[0]; }
+    char* end() noexcept { return &data[N - 1]; }
+
+    [[nodiscard]] const char* begin() const noexcept { return &data[0]; }
+    [[nodiscard]] const char* end() const noexcept { return &data[N - 1]; }
+
+    [[nodiscard]] const char* cbegin() const noexcept { return &data[0]; }
+    [[nodiscard]] const char* cend() const noexcept { return &data[N - 1]; }
+
+    constexpr operator std::string_view() const noexcept {
+      return std::string_view(data, size());
+    }
   };
 
   constexpr bool equal(char const* a, char const* b) {
@@ -73,9 +74,8 @@ namespace a4z {
   }
 
   constexpr const char* last_c_in(char c, const char* str) {
-    auto f = first_c_in(c, str);
-    auto n = f;
-
+    const auto* f = first_c_in(c, str);
+    const auto* n = f;
     while (n != nullptr) {
       f = n++;
       n = first_c_in(c, n);
@@ -121,14 +121,13 @@ namespace a4z {
     return npos;  // Not found
   }
 
-  inline constexpr bool on_windows() {
+  consteval bool on_windows() {
 #ifdef _WIN32
     return true;
 #else
     return false;
 #endif
   }
-
 
 }  // namespace a4z
 

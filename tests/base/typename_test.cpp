@@ -7,7 +7,6 @@
 // This shows a few use cases,
 // should be clear that this is not a real reflection and has limits
 
-
 SCENARIO("Check simple typename") {
   GIVEN("the typename of an int") {
     auto tn = a4z::type_name<int>();

@@ -24,7 +24,7 @@ jobs:
         run: cmake --preset ninja
 
       - name: Check format
-        run: --build --preset ninja --target clang-format-check
+        run: cmake --build --preset ninja --target clang-format-check
 
   build:
     runs-on: ${{ matrix.os }}

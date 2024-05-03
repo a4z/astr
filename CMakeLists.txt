@@ -39,6 +39,14 @@ if(PROJECT_IS_TOP_LEVEL)
         VERBATIM
     )
 
+    add_custom_target(
+        clang-format-check
+        COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format --Werror --dry-run
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        VERBATIM
+        USES_TERMINAL
+    )
+
 else()
     option(ASTR_ADD_INSTALL "Add install target" OFF)
 endif()

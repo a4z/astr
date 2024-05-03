@@ -9,6 +9,18 @@ on:
       - main
 
 jobs:
+  check-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake --preset ninja
+
+      - name: Check format
+        run: --build --preset ninja --target clang-format-check
+
   build:
     runs-on: ${{ matrix.os }}
     strategy:

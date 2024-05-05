@@ -30,6 +30,15 @@ if(PROJECT_IS_TOP_LEVEL)
     )
 
     add_custom_target(
+        clang_tidy
+        COMMAND ${CMAKE_SOURCE_DIR}/run_clang_tidy.sh ${CMAKE_CXX_STANDARD} ${CMAKE_BINARY_DIR}
+        COMMENT "Running clang-tidy on each file individually"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        USES_TERMINAL
+    )
+
+
+    add_custom_target(
         clang-format
         COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}

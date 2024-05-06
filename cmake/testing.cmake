@@ -15,7 +15,7 @@ FetchContent_MakeAvailable(doctest)
 add_library(doctest_main STATIC ${PROJECT_SOURCE_DIR}/tests/test_main.cpp)
 
 set(TEST_FRAMEWORK doctest::doctest)
-set(THIS_PROJECT_LIBS astr)
+set(THIS_PROJECT_LIBS astr default::flags)
 
 target_link_libraries(doctest_main PUBLIC ${TEST_FRAMEWORK})
 

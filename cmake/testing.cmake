@@ -12,6 +12,8 @@ set(DOCTEST_NO_INSTALL True)
 
 FetchContent_MakeAvailable(doctest)
 
+find_package(doctest CONFIG REQUIRED)
+
 add_library(doctest_main STATIC ${PROJECT_SOURCE_DIR}/tests/test_main.cpp)
 
 set(TEST_FRAMEWORK doctest::doctest)

@@ -6,5 +6,3 @@ There are two examples, getting short file names and getting type names.
 
 - File names work as described in the blog post.
 - Type names work for a set of use cases but is not a universal solution or replacement for reflections.
-
-License: MIT

@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.27)
 
-project(astr VERSION 1.0.0 LANGUAGES CXX)
+project(astr VERSION 0.1.1 LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
     # make git ignore the build directory
@@ -78,29 +78,28 @@ if (ASTR_ADD_INSTALL)
 
 # include gnudirs and add installation of the header file of the astr library
     include(GNUInstallDirs)
-    install(TARGETS astr EXPORT astrTargets)
+    install(TARGETS astr EXPORT astrTargets INCLUDES DESTINATION "${CMAKE_INSTALL_DATADIR}")
     install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     install(EXPORT astrTargets
         FILE astrTargets.cmake
         NAMESPACE a4z::
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/a4z
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/${PROJECT_NAME}"
     )
     include(CMakePackageConfigHelpers)
     write_basic_package_version_file(
         ${CMAKE_CURRENT_BINARY_DIR}/astrConfigVersion.cmake
-        VERSION 1.0.0
         COMPATIBILITY AnyNewerVersion
     )
     configure_package_config_file(
         ${CMAKE_CURRENT_LIST_DIR}/cmake/astrConfig.cmake.in
         ${CMAKE_CURRENT_BINARY_DIR}/astrConfig.cmake
-        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/a4z
+        INSTALL_DESTINATION "share/cmake/${PROJECT_NAME}"
     )
     install(
         FILES
             ${CMAKE_CURRENT_BINARY_DIR}/astrConfig.cmake
             ${CMAKE_CURRENT_BINARY_DIR}/astrConfigVersion.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/a4z
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/${PROJECT_NAME}"
     )
 
 endif()

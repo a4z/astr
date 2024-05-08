@@ -1,16 +1,20 @@
 include_guard(GLOBAL)
 
-include(FetchContent)
+option(FETCH_DOCTEST "Use fetch content to get doctest" ON)
+if (FETCH_DOCTEST)
+  message(STATUS "Fetching doctest")
 
-FetchContent_Declare(
-        doctest
-        GIT_REPOSITORY "https://github.com/onqtam/doctest"
-        GIT_TAG "v2.4.11"
-)
+  include(FetchContent)
+
+  FetchContent_Declare(
+    doctest
+    GIT_REPOSITORY https://github.com/onqtam/doctest
+    GIT_TAG        v2.4.11
+    OVERRIDE_FIND_PACKAGE
+  )
+endif()
 
 set(DOCTEST_NO_INSTALL True)
-
-FetchContent_MakeAvailable(doctest)
 
 find_package(doctest CONFIG REQUIRED)
 

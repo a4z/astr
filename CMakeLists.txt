@@ -15,9 +15,11 @@ if(PROJECT_IS_TOP_LEVEL)
     include(setup_compiler)
     include(default_flags)
 
-    enable_testing()
-    include(testing)
-    add_subdirectory(tests)
+    include(CTest)
+    if  (BUILD_TESTING)
+        include(testing)
+        add_subdirectory(tests)
+    endif()
 
     option(ASTR_ADD_INSTALL "Add install target" ON)
 

@@ -9,7 +9,7 @@ Feel free to open an issue if you need help with that.
 
 ## Getting short file names as compile time strings
 
-Reproducible and fix size 'strings' of __FILE__  at compile time.
+Reproducible and fix size 'strings' for the `__FILE__` name  at compile time.
 
 The code is related to the blog post ['Compile time string literals processing, but why'](https://a4z.gitlab.io/blog/2023/11/04/Compiletime-string-literals-processing.html), which describes some more details about this feature.
 

@@ -49,6 +49,9 @@ SCENARIO("Check struct in a namespace typename") {
   }
 }
 
+// This shows how to customize the typename for a type where compilers have different display names
+// std::string could be something like basic_string<char, char_traits<char>, allocator<char>>
+// and this is nothing you want to see (except for debug purposes)
 namespace a4z {
   template <>
   constexpr auto type_name<std::string>() {

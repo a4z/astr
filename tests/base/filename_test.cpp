@@ -2,6 +2,7 @@
 #include <a4z/filename.hpp>
 
 #include <string>
+#include <ostream>
 
 SCENARIO("Check find slashes") {
   GIVEN("a string with more than 2 slashes") {

@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.27)
 
-project(astr VERSION 0.1.1 LANGUAGES CXX)
+project(astr VERSION 0.2.0 LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
     # make git ignore the build directory

@@ -39,17 +39,26 @@ if(PROJECT_IS_TOP_LEVEL)
         USES_TERMINAL
     )
 
+    if(WIN32)
+        set(FORMAT_COMMAND powershell -Command "git ls-files | Where-Object {$_ -match '.*\\.(c|h|cpp|hpp)$'} | ForEach-Object {clang-format -i $_}")
+        set(FORMAT_CHECK_COMMAND powershell -Command "git ls-files | Where-Object {$_ -match '.*\\.(c|h|cpp|hpp)$'} | ForEach-Object {clang-format --Werror --dry-run $_}")
+    else()
+        set(FORMAT_COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i)
+        set(FORMAT_CHECK_COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format --Werror --dry-run)
+    endif()
 
     add_custom_target(
         clang-format
-        COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i
+        # COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i
+        COMMAND ${FORMAT_COMMAND}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         VERBATIM
     )
 
     add_custom_target(
         clang-format-check
-        COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format --Werror --dry-run
+        # COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format --Werror --dry-run
+        COMMAND ${FORMAT_CHECK_COMMAND}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         VERBATIM
         USES_TERMINAL

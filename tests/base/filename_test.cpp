@@ -30,6 +30,52 @@ SCENARIO("Check find slashes") {
   // and there is a constant file name implementation
 }
 
+SCENARIO("Truncate a astr") {
+  GIVEN("some astr with 10 characters") {
+    constexpr char abc[] = "0123456789";
+    constexpr a4z::astr a10(abc);
+    REQUIRE(a10.size() == 10);
+    WHEN("requesting the last 5 characters") {
+      constexpr auto a5 = a10.last_n<5>();
+      THEN("we have a new astr of size 5") {
+        CHECK(a5.size() == 5);
+        std::string wanted = "56789";
+        std::string_view having = a5;
+        CHECK(wanted == having);
+      }
+    }
+    WHEN("requesting the last characters of the same size") {
+      // defacto a copy
+      constexpr auto other = a10.last_n<a10.size()>();
+      THEN("we have a new astr of size 10") {
+        CHECK(other.size() == a10.size());
+        std::string wanted = abc;
+        std::string_view having = other;
+        CHECK(wanted == having);
+      }
+    }
+    WHEN("requesting the first 5 characters") {
+      constexpr auto a5 = a10.first_n<5>();
+      THEN("we have a new astr of size 5") {
+        CHECK(a5.size() == 5);
+        std::string wanted = "01234";
+        std::string_view having = a5;
+        CHECK(wanted == having);
+      }
+    }
+    WHEN("requesting the first characters of the same size") {
+      // defacto a copy
+      constexpr auto other = a10.first_n<a10.size()>();
+      THEN("we have a new astr of size 10") {
+        CHECK(other.size() == a10.size());
+        std::string wanted = abc;
+        std::string_view having = other;
+        CHECK(wanted == having);
+      }
+    }
+  }
+}
+
 SCENARIO("Test with filename macro") {
   GIVEN("the current filename") {
     constexpr auto fn = a4z_file_name();

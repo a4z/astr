@@ -17,6 +17,8 @@ namespace a4z {
   struct astr {
     char data[N] = {0};
 
+    constexpr astr() noexcept = default;
+
     constexpr explicit astr(const char (&arr)[N]) noexcept {
       for (std::size_t i = 0; i < N; ++i) {
         data[i] = *(arr + i);
@@ -40,6 +42,26 @@ namespace a4z {
 
     constexpr operator std::string_view() const noexcept {
       return std::string_view(data, size());
+    }
+
+    template <std::size_t T>
+    constexpr auto last_n() const noexcept -> astr<T + 1> {
+      static_assert(N > T,
+                    "Wanted sized T cannot be greater than actual size N");
+      astr<T + 1> result;
+      constexpr std::size_t start = N - T - 1;  // N > T is asserted above
+      std::copy(data + start, data + N, result.data);
+      return result;
+    }
+
+    template <std::size_t T>
+    constexpr auto first_n() const noexcept -> astr<T + 1> {
+      static_assert(N > T,
+                    "Wanted sized T cannot be greater than actual size N");
+      astr<T + 1> result;
+      constexpr std::size_t last = T;
+      std::copy(data, data + last, result.data);
+      return result;
     }
   };
 

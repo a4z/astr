@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.27)
 
-project(astr VERSION 0.2.0 LANGUAGES CXX)
+project(astr VERSION 0.2.1 LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
     # make git ignore the build directory
@@ -89,7 +89,7 @@ if (ASTR_ADD_INSTALL)
 
 # include gnudirs and add installation of the header file of the astr library
     include(GNUInstallDirs)
-    install(TARGETS astr EXPORT astrTargets INCLUDES DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+    install(TARGETS astr EXPORT astrTargets)
     install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
     install(EXPORT astrTargets
         FILE astrTargets.cmake

@@ -49,7 +49,6 @@ if(PROJECT_IS_TOP_LEVEL)
 
     add_custom_target(
         clang-format
-        # COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format -i
         COMMAND ${FORMAT_COMMAND}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         VERBATIM
@@ -57,7 +56,6 @@ if(PROJECT_IS_TOP_LEVEL)
 
     add_custom_target(
         clang-format-check
-        # COMMAND git ls-files | grep -E ".*\\.(c|h|cpp|hpp)$" | xargs clang-format --Werror --dry-run
         COMMAND ${FORMAT_CHECK_COMMAND}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         VERBATIM

@@ -82,14 +82,22 @@ SCENARIO("Test with filename macro") {
     constexpr auto fn = a4z_file_name();
 
     WHEN("checking if it starts with base") {
-      const auto starts_with_base = std::string(fn.c_str()).starts_with("base");
+      // cpp20
+      // const auto starts_with_base =
+      // std::string(fn.c_str()).starts_with("base");
+      const char* base = "base";
+      auto start_str = fn.first_n<4>();
+      const auto starts_with_base = a4z::equal(base, start_str.c_str());
       THEN("we find it at the expected position") {
         CHECK(starts_with_base);
       }
     }
     AND_WHEN("checking if it ends with ") {
-      const auto ends_with_filename =
-          std::string(fn.c_str()).ends_with("filename_test.cpp");
+      const char* filename = "filename_test.cpp";
+      auto end_str = fn.last_n<17>();
+      const auto ends_with_filename = a4z::equal(filename, end_str.c_str());
+      // cpp20
+      // std::string(fn.c_str()).ends_with("filename_test.cpp");
       THEN("we find it at the expected position") {
         CHECK(ends_with_filename);
       }

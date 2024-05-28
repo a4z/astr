@@ -50,7 +50,11 @@ namespace a4z {
                     "Wanted sized T cannot be greater than actual size N");
       astr<T + 1> result;
       constexpr std::size_t start = N - T - 1;  // N > T is asserted above
-      std::copy(data + start, data + N, result.data);
+      // cpp20, not yet
+      // std::copy(data + start, data + N, result.data);
+      for (size_t i = start; i < N; ++i) {
+        result.data[i - start] = data[i];
+      }
       return result;
     }
 
@@ -60,7 +64,11 @@ namespace a4z {
                     "Wanted sized T cannot be greater than actual size N");
       astr<T + 1> result;
       constexpr std::size_t last = T;
-      std::copy(data, data + last, result.data);
+      // cpp20, not yet
+      // std::copy(data, data + last, result.data);
+      for (size_t i = 0; i < last; ++i) {
+        result.data[i] = data[i];
+      }
       return result;
     }
   };
@@ -149,7 +157,7 @@ namespace a4z {
     return npos;  // Not found
   }
 
-  consteval bool on_windows() {
+  constexpr bool on_windows() {
 #ifdef _WIN32
     return true;
 #else

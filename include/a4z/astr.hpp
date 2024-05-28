@@ -136,26 +136,26 @@ namespace a4z {
   constexpr auto npos = std::numeric_limits<std::size_t>::max();
 
   consteval std::size_t find_nth_r_occurrence(std::span<const char> str,
-											  const char target,
-		                                      std::size_t occurrence)
-  {
-    std::size_t occurrence_count{ 0 };
-	const auto reverse_view {str | std::views::reverse};
-	const auto it{ std::ranges::find_if( reverse_view,
-	   									 [target, occurrence,
-   										  &occurrence_count](const char c) {
-											 if (c == target) {
-												 ++occurrence_count;
-												 return occurrence_count == occurrence;
-											 }
-											 return false;
-										 }) };
-	if( it == std::end(reverse_view) ) return npos;
+                                              const char target,
+                                              std::size_t occurrence) {
+    std::size_t occurrence_count{0};
+    const auto reverse_view{str | std::views::reverse};
+    const auto it{std::ranges::find_if(
+        reverse_view, [target, occurrence, &occurrence_count](const char c) {
+          if (c == target) {
+            ++occurrence_count;
+            return occurrence_count == occurrence;
+          }
+          return false;
+        })};
+    if (it == std::end(reverse_view))
+      return npos;
 
-	/* When converting a reverse iterator to a normal iterator,
-	   there is an off-by-one difference between their positions due to
-	   the way reverse iterators are implemented.*/
-	return static_cast<std::size_t>(std::distance( std::begin(str), it.base()-1 ));
+    /* When converting a reverse iterator to a normal iterator,
+       there is an off-by-one difference between their positions due to
+       the way reverse iterators are implemented.*/
+    return static_cast<std::size_t>(
+        std::distance(std::begin(str), it.base() - 1));
   }
 
   consteval bool on_windows() {

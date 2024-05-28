@@ -15,14 +15,14 @@ namespace a4z {
 
   constexpr char slash = on_windows() ? '\\' : '/';
 
-#define a4z_file_name							                                   \
-	[]() consteval {							                                   \
-		constexpr auto location = std::source_location::current();                 \
-		constexpr std::string_view filename{ location.file_name() };               \
-		constexpr auto start{a4z::find_nth_r_occurrence(filename, a4z::slash, 2)}; \
-		static_assert( start != a4z::npos );							\
-		return filename.substr( start + 1 );                                       \
-    }                                                                              \
+#define a4z_file_name                                                          \
+  []() consteval {                                                             \
+    constexpr auto location = std::source_location::current();                 \
+    constexpr std::string_view filename{location.file_name()};                 \
+    constexpr auto start{a4z::find_nth_r_occurrence(filename, a4z::slash, 2)}; \
+    static_assert(start != a4z::npos);                                         \
+    return filename.substr(start + 1);                                         \
+  }
 
 }  // namespace a4z
 

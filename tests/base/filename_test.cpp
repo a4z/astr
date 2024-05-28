@@ -88,8 +88,7 @@ SCENARIO("Test with filename macro") {
       }
     }
     AND_WHEN("checking if it ends with ") {
-      constexpr auto ends_with_filename =
-          fn.ends_with("filename_test.cpp");
+      constexpr auto ends_with_filename = fn.ends_with("filename_test.cpp");
       THEN("we find it at the expected position") {
         CHECK(ends_with_filename);
       }

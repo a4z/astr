@@ -53,7 +53,7 @@ namespace a4z {
       // cpp20, not yet
       // std::copy(data + start, data + N, result.data);
       for (size_t i = start; i < N; ++i) {
-          result.data[i - start] = data[i];
+        result.data[i - start] = data[i];
       }
       return result;
     }
@@ -65,9 +65,9 @@ namespace a4z {
       astr<T + 1> result;
       constexpr std::size_t last = T;
       // cpp20, not yet
-      //std::copy(data, data + last, result.data);
+      // std::copy(data, data + last, result.data);
       for (size_t i = 0; i < last; ++i) {
-          result.data[i] = data[i];
+        result.data[i] = data[i];
       }
       return result;
     }

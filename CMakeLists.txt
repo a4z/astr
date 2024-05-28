@@ -1,16 +1,12 @@
 
 cmake_minimum_required(VERSION 3.27)
 
-project(astr VERSION 0.2.1 LANGUAGES CXX)
+project(astr VERSION 0.3.0 LANGUAGES CXX)
 
 if(PROJECT_IS_TOP_LEVEL)
     # make git ignore the build directory
     file(WRITE ${CMAKE_BINARY_DIR}/.gitignore "*")
-    set(CMAKE_CXX_STANDARD 20)
-    set(CMAKE_CXX_EXTENSIONS OFF)
-    SET(CMAKE_COMPILE_WARNING_AS_ERROR ON) # turn off with --compile-no-warning-as-error
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
     list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
     include(setup_compiler)
     include(default_flags)

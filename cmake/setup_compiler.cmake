@@ -23,10 +23,11 @@ endif(NOT isMultiConfig)
 
 # Off, we do not want to annoy potential packager
 # option(WARN_ERROR "Thread warnings as errors. Default OFF" OFF)
-
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+set(CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 SET(CMAKE_COMPILE_WARNING_AS_ERROR ON) # turn off with --compile-no-warning-as-error
+
 
 if(APPLE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # https://stackoverflow.com/questions/77153800/xcode-15-c-compilation-errors

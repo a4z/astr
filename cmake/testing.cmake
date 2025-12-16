@@ -9,7 +9,7 @@ if (FETCH_DOCTEST)
   FetchContent_Declare(
     doctest
     GIT_REPOSITORY https://github.com/onqtam/doctest
-    GIT_TAG        v2.4.11
+    GIT_TAG        v2.4.12
     OVERRIDE_FIND_PACKAGE
   )
 endif()

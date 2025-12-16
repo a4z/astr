@@ -35,6 +35,13 @@
     },
     {
       "inherits": "base",
+      "name": "msvc26",
+      "displayName": "VS 2026",
+      "description": "Visual Studio 2026 Multiconfig",
+      "generator": "Visual Studio 18 2026"
+    },   
+    {
+      "inherits": "base",
       "name": "xcode",
       "displayName": "Xcode",
       "description": "Xcode Multiconfig",
@@ -72,6 +79,16 @@
       "configurePreset": "msvc22",
       "configuration": "Release"
     },
+    {
+      "name": "msvc26",
+      "configurePreset": "msvc26",
+      "configuration": "Debug"
+    },
+    {
+      "name": "msvc26-release",
+      "configurePreset": "msvc26",
+      "configuration": "Release"
+    },    
     {
       "name": "xcode",
       "configurePreset": "xcode",
@@ -115,6 +132,16 @@
       "inherits": "msvc22",
       "configuration": "Release"
     },
+    {
+      "name": "msvc26",
+      "configurePreset": "msvc26",
+      "configuration": "Debug"
+    },
+    {
+      "name": "msvc26-release",
+      "inherits": "msvc26",
+      "configuration": "Release"
+    },    
     {
       "name": "xcode",
       "configurePreset": "xcode",

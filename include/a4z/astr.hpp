@@ -165,6 +165,14 @@ namespace a4z {
 #endif
   }
 
+  constexpr bool using_clang() {
+#ifdef __clang__
+    return true;
+#else
+    return false;
+#endif
+  }
+
 }  // namespace a4z
 
 #endif  // A4z_ASTR_HPP

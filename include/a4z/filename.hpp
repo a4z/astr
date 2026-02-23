@@ -11,7 +11,7 @@
 
 namespace a4z {
 
-  constexpr char slash = on_windows() ? '\\' : '/';
+  constexpr char slash = on_windows() && !using_clang() ? '\\' : '/';
 
 #define a4z_file_name                                                          \
   []() constexpr {                                                             \

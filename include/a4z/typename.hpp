@@ -14,10 +14,10 @@ namespace a4z {
 
   template <typename T>
   constexpr const char* type_name_str() {
-#if defined(_MSC_VER)
-    return __FUNCSIG__;
-#elif defined(__GNUC__) || defined(__clang__)
+#if defined(__GNUC__) || defined(__clang__)
     return __PRETTY_FUNCTION__;
+#elif defined(_MSC_VER)
+    return __FUNCSIG__;
 #else
     error("compiler not supported, feel free to add a PR")
 #endif
@@ -25,7 +25,14 @@ namespace a4z {
 
   template <typename T>
   constexpr auto type_name() {
-#if defined(_MSC_VER)
+#if defined(__GNUC__) || defined(__clang__)
+    constexpr const char* thisname = __PRETTY_FUNCTION__;
+    constexpr auto eq = a4z::first_c_in('=', thisname);
+    constexpr auto past_eq = a4z::next_c(eq);
+    constexpr auto tstart = a4z::first_not(' ', past_eq);
+    constexpr auto tend = a4z::last_c_in(']', thisname);
+
+#elif defined(_MSC_VER)
     constexpr const char* thisname = __FUNCSIG__;
     constexpr auto ang = a4z::first_c_in('<', thisname);
     constexpr auto space = a4z::first_c_in(' ', ang);
@@ -34,13 +41,6 @@ namespace a4z {
     constexpr auto tend = a4z::last_c_in('>', thisname);
 
     // constexpr size_t len = tend - tstart; // very likely a distance
-
-#elif defined(__GNUC__) || defined(__clang__)
-    constexpr const char* thisname = __PRETTY_FUNCTION__;
-    constexpr auto eq = a4z::first_c_in('=', thisname);
-    constexpr auto past_eq = a4z::next_c(eq);
-    constexpr auto tstart = a4z::first_not(' ', past_eq);
-    constexpr auto tend = a4z::last_c_in(']', thisname);
 
 #else
     error("compiler not supported, feel free to add a PR")

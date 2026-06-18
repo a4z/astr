@@ -1,7 +1,6 @@
 #include <doctest/doctest.h>
 #include <a4z/filename.hpp>
 
-#include <iostream>
 #include <ostream>
 #include <string>
 
@@ -128,8 +127,6 @@ SCENARIO("Test with filename macro") {
       // cpp20
       // std::string(fn.c_str()).ends_with("filename_test.cpp");
       THEN("we find it at the expected position") {
-        // MESSAGE(fn.c_str());
-        std::cout << fn.c_str() << std::endl;
         CHECK(ends_with_filename);
       }
     }

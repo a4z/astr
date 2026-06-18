@@ -13,12 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build clang-format
+        uses: actions/checkout@v7
 
       - name: Configure CMake
         run: cmake --preset ninja
@@ -41,13 +36,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Install dependencies on Ubuntu
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake ninja-build
+      uses: actions/checkout@v7
 
     - name: Configure CMake
       run: |

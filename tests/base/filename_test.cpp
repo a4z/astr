@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 #include <a4z/filename.hpp>
 
+#include <iostream>
 #include <ostream>
 #include <string>
 
@@ -77,6 +78,33 @@ SCENARIO("Truncate a astr") {
   }
 }
 
+SCENARIO("Test a4z_file_name_from with path delimiter") {
+  GIVEN("a path string with two delimiters") {
+    static constexpr char path[] = {'a', a4z::slash, 'b', a4z::slash, 'c', '\0'};
+    constexpr auto fn = a4z_file_name_from(path);
+    WHEN("requesting the result") {
+      static constexpr char expected[] = {'b', a4z::slash, 'c', '\0'};
+      const auto matches = a4z::equal(expected, fn.c_str());
+      THEN("it contains the segment after the second-to-last delimiter") {
+        CHECK(matches);
+      }
+    }
+  }
+}
+
+SCENARIO("Test a4z_file_name_from without path delimiter") {
+  GIVEN("a path string with no delimiter") {
+    static constexpr char path[] = {'a', 'b', 'c', '\0'};
+    constexpr auto fn = a4z_file_name_from(path);
+    WHEN("requesting the result") {
+      const auto matches = a4z::equal("abc", fn.c_str());
+      THEN("it returns the whole string") {
+        CHECK(matches);
+      }
+    }
+  }
+}
+
 SCENARIO("Test with filename macro") {
   GIVEN("the current filename") {
     constexpr auto fn = a4z_file_name();
@@ -99,7 +127,10 @@ SCENARIO("Test with filename macro") {
       // cpp20
       // std::string(fn.c_str()).ends_with("filename_test.cpp");
       THEN("we find it at the expected position") {
+        // MESSAGE(fn.c_str());
+        std::cout << fn.c_str() << std::endl;
         CHECK(ends_with_filename);
+
       }
     }
   }

@@ -35,7 +35,7 @@ jobs:
           - os: ubuntu-latest
             cmake_preset: ninja
           - os: windows-latest
-            cmake_preset: msvc22
+            cmake_preset: msvc26
           - os: macos-latest
             cmake_preset: xcode
 

@@ -21,7 +21,7 @@ namespace a4z {
     constexpr std::size_t offset = (start == a4z::npos ? 0 : start);           \
     constexpr std::size_t offset_add = (start == a4z::npos ? 0 : 1);           \
     constexpr std::size_t astr_len =                                           \
-        (start == a4z::npos ? len + 1 : len - start);                         \
+        (start == a4z::npos ? len + 1 : len - start);                          \
     char data[astr_len] = {0};                                                 \
     for (std::size_t i = 0; i < astr_len; ++i) {                               \
       data[i] = *(str + offset + offset_add + i);                              \
@@ -32,7 +32,5 @@ namespace a4z {
 #define a4z_file_name() a4z_file_name_from(__FILE__)
 
 }  // namespace a4z
-
-
 
 #endif  // A4Z_FILENAME_HPP

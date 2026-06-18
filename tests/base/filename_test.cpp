@@ -80,7 +80,8 @@ SCENARIO("Truncate a astr") {
 
 SCENARIO("Test a4z_file_name_from with path delimiter") {
   GIVEN("a path string with two delimiters") {
-    static constexpr char path[] = {'a', a4z::slash, 'b', a4z::slash, 'c', '\0'};
+    using a4z::slash;
+    static constexpr char path[] = {'a', slash, 'b', slash, 'c', '\0'};
     constexpr auto fn = a4z_file_name_from(path);
     WHEN("requesting the result") {
       static constexpr char expected[] = {'b', a4z::slash, 'c', '\0'};
@@ -130,7 +131,6 @@ SCENARIO("Test with filename macro") {
         // MESSAGE(fn.c_str());
         std::cout << fn.c_str() << std::endl;
         CHECK(ends_with_filename);
-
       }
     }
   }
